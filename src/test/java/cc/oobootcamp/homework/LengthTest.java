@@ -12,7 +12,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 public class LengthTest {
 
   @Test(expected = IndexOutOfBoundsException.class)
-  public void should_throw__when_create_length_of_negative_number() {
+  public void should_throw_IndexOutOfBoundsException_when_create_length_of_negative_number() {
     new Length(-1);
   }
 
