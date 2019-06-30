@@ -4,17 +4,19 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import org.junit.Test;
 
-public class SmartGraduateParkingBoyTest {
+public class SmartParkingBoyTest {
 
   @Test
   public void should_return_a_valid_ticket_when_park_a_car_into_given_2_parking_lots_one_have_more_available_space() {
     ParkingLot lessSpaceParkingLot = new ParkingLot(2);
     ParkingLot moreSpaceParkingLot = new ParkingLot(3);
-    SmartParkingBoy parkingBoy = new SmartParkingBoy(
-        Arrays.asList(lessSpaceParkingLot, moreSpaceParkingLot)
-    );
+    List<ParkingLot> parkingLots = Arrays.asList(lessSpaceParkingLot, moreSpaceParkingLot);
+    Collections.shuffle(parkingLots);
+    SmartParkingBoy parkingBoy = new SmartParkingBoy(parkingLots);
     Car car = new Car();
 
     Ticket ticket = parkingBoy.park(car);

@@ -32,7 +32,7 @@ leaving 取车
 
 ## SmartParkingBoy
 ### park
-**Given** Parking Boy管理着两个有空位的停车场, 其中一个空位更多
+**Given** Smart Parking Boy管理着两个有空位的停车场, 其中一个空位更多
 **When** 停一辆车
 **Then** 成功停到空位更多的停车场, 返回停车票
 
