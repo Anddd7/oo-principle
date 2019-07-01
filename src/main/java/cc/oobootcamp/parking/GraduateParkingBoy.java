@@ -17,4 +17,13 @@ public class GraduateParkingBoy extends ParkingBoy {
         .findFirst()
         .map(parkInto(car));
   }
+
+  @Override
+  protected Optional<Car> tryPick(Ticket ticket) {
+    return getParkingLots()
+        .stream()
+        .filter(isValidTicket(ticket))
+        .findFirst()
+        .map(pickFrom(ticket));
+  }
 }

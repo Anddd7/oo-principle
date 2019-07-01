@@ -100,6 +100,23 @@ public class ParkingManagerTest {
     assertThat(pickedCar).isEqualTo(car);
   }
 
+  @Test
+  public void should_pick_the_car_when_pick_given_a_valid_ticket_with_a_car_parked_in_smart() {
+    ParkingBoy graduateParkingBoy = buildAFullGraduateParkingBoy();
+    ParkingBoy smartParkingBoy = new SmartParkingBoy(Collections.singletonList(new ParkingLot(1)));
+    ParkingManager parkingManager = new ParkingManager(
+        Collections.singletonList(buildAFullParkingLot()),
+        graduateParkingBoy,
+        smartParkingBoy
+    );
+    Car car = new Car();
+    Ticket ticket = parkingManager.park(car);
+
+    Car pickedCar = parkingManager.pick(ticket);
+
+    assertThat(pickedCar).isEqualTo(car);
+  }
+
   private ParkingLot buildAFullParkingLot() {
     return new ParkingLot(1, new Car());
   }

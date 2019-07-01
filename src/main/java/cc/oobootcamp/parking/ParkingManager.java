@@ -29,4 +29,21 @@ public class ParkingManager extends SmartParkingBoy {
         .findFirst()
         .orElse(Optional.empty());
   }
+
+  @Override
+  protected Optional<Car> tryPick(Ticket ticket) {
+    Optional<Car> optionalCar = super.tryPick(ticket);
+    if (optionalCar.isPresent()) {
+      return optionalCar;
+    }
+    return tryPickByParkingBoys(ticket);
+  }
+
+  private Optional<Car> tryPickByParkingBoys(Ticket ticket) {
+    return parkingBoys.stream()
+        .map(parkingBoy -> parkingBoy.tryPick(ticket))
+        .filter(Optional::isPresent)
+        .findFirst()
+        .orElse(Optional.empty());
+  }
 }

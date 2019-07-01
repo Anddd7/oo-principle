@@ -19,27 +19,25 @@ public abstract class ParkingBoy {
 
   abstract protected Optional<Ticket> tryPark(Car car);
 
+  abstract protected Optional<Car> tryPick(Ticket ticket);
+
   public Ticket park(Car car) {
     return tryPark(car).orElseThrow(ParkingLotIsFullException::new);
   }
 
   public Car pick(Ticket ticket) {
-    return parkingLots.stream()
-        .filter(isValidTicket(ticket))
-        .findFirst()
-        .map(pickFrom(ticket))
-        .orElseThrow(InvalidTicketException::new);
+    return tryPick(ticket).orElseThrow(InvalidTicketException::new);
   }
 
   Function<ParkingLot, Ticket> parkInto(Car car) {
     return parkingLot -> parkingLot.park(car);
   }
 
-  private Predicate<ParkingLot> isValidTicket(Ticket ticket) {
+  Predicate<ParkingLot> isValidTicket(Ticket ticket) {
     return parkingLot -> parkingLot.isValidTicket(ticket);
   }
 
-  private Function<ParkingLot, Car> pickFrom(Ticket ticket) {
+  Function<ParkingLot, Car> pickFrom(Ticket ticket) {
     return parkingLot -> parkingLot.pick(ticket);
   }
 }
