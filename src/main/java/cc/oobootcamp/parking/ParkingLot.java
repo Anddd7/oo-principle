@@ -41,12 +41,16 @@ public class ParkingLot {
     return lots.containsKey(ticket);
   }
 
+  @Deprecated
   public boolean isParkedCar(Car car) {
     return lots.containsValue(car);
   }
 
   boolean hasAvailableLots() {
-    return (parkSize - lots.size())>0;
+    return getAvailableLots() > 0;
   }
 
+  int getAvailableLots() {
+    return parkSize - lots.size();
+  }
 }
