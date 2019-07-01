@@ -3,8 +3,6 @@ package cc.oobootcamp.parking;
 import static java.util.Comparator.comparing;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Stream;
 
 public class SmartParkingBoy extends ParkingBoy {
 
@@ -13,8 +11,12 @@ public class SmartParkingBoy extends ParkingBoy {
   }
 
   @Override
-  Optional<ParkingLot> parkingStrategy(Stream<ParkingLot> parkingLots) {
-    return parkingLots.max(comparing(ParkingLot::getAvailableLots))
-        .filter(ParkingLot::hasAvailableLots);
+  public Ticket park(Car car) {
+    return getParkingLots()
+        .stream()
+        .max(comparing(ParkingLot::getAvailableLots))
+        .filter(ParkingLot::hasAvailableLots)
+        .map(parkInto(car))
+        .orElseThrow(ParkingLotIsFullException::new);
   }
 }

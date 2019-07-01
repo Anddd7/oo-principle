@@ -1,8 +1,6 @@
 package cc.oobootcamp.parking;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Stream;
 
 public class GraduateParkingBoy extends ParkingBoy {
 
@@ -12,13 +10,11 @@ public class GraduateParkingBoy extends ParkingBoy {
 
   @Override
   public Ticket park(Car car) {
-    return super.park(car);
-  }
-
-  @Override
-  Optional<ParkingLot> parkingStrategy(Stream<ParkingLot> parkingLots) {
-    return parkingLots
+    return getParkingLots()
+        .stream()
         .filter(ParkingLot::hasAvailableLots)
-        .findFirst();
+        .findFirst()
+        .map(parkInto(car))
+        .orElseThrow(ParkingLotIsFullException::new);
   }
 }
