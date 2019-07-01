@@ -1,6 +1,7 @@
 package cc.oobootcamp.parking;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -17,6 +18,8 @@ public abstract class ParkingBoy {
   }
 
   abstract public Ticket park(Car car);
+
+  abstract Optional<Ticket> tryPark(Car car);
 
   public Car pick(Ticket ticket) {
     return parkingLots.stream()

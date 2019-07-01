@@ -22,7 +22,7 @@ public class ParkingLot {
   }
 
   public Ticket park(Car car) {
-    if (lots.size() < parkSize) {
+    if (hasAvailableLots()) {
       Ticket ticket = new Ticket(car);
       lots.put(ticket, car);
       return ticket;
