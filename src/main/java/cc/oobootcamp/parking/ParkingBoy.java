@@ -17,9 +17,11 @@ public abstract class ParkingBoy {
     this.parkingLots = parkingLots;
   }
 
-  abstract public Ticket park(Car car);
-
   abstract Optional<Ticket> tryPark(Car car);
+
+  public Ticket park(Car car) {
+    return tryPark(car).orElseThrow(ParkingLotIsFullException::new);
+  }
 
   public Car pick(Ticket ticket) {
     return parkingLots.stream()

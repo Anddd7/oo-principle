@@ -29,9 +29,4 @@ public class ParkingManager extends SmartParkingBoy {
         .findFirst()
         .orElse(Optional.empty());
   }
-
-  @Override
-  public Ticket park(Car car) {
-    return tryPark(car).orElseThrow(ParkingLotIsFullException::new);
-  }
 }

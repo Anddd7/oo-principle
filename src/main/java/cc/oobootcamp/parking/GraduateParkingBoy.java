@@ -10,16 +10,6 @@ public class GraduateParkingBoy extends ParkingBoy {
   }
 
   @Override
-  public Ticket park(Car car) {
-    return getParkingLots()
-        .stream()
-        .filter(ParkingLot::hasAvailableLots)
-        .findFirst()
-        .map(parkInto(car))
-        .orElseThrow(ParkingLotIsFullException::new);
-  }
-
-  @Override
   Optional<Ticket> tryPark(Car car) {
     return getParkingLots()
         .stream()

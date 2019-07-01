@@ -12,16 +12,6 @@ public class SmartParkingBoy extends ParkingBoy {
   }
 
   @Override
-  public Ticket park(Car car) {
-    return getParkingLots()
-        .stream()
-        .max(comparing(ParkingLot::getAvailableLots))
-        .filter(ParkingLot::hasAvailableLots)
-        .map(parkInto(car))
-        .orElseThrow(ParkingLotIsFullException::new);
-  }
-
-  @Override
   Optional<Ticket> tryPark(Car car) {
     return getParkingLots()
         .stream()
