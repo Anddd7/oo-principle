@@ -3,18 +3,19 @@ package cc.oobootcamp.parking;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Function;
 
 public class ParkingManager extends SmartParkingBoy {
 
-  private List<ParkingBoy> parkingBoys;
+  private List<IParkingBoy> parkingBoys;
 
-  public ParkingManager(List<ParkingLot> parkingLots, ParkingBoy... parkingBoys) {
+  public ParkingManager(List<ParkingLot> parkingLots, IParkingBoy... parkingBoys) {
     super(parkingLots);
     this.parkingBoys = Arrays.asList(parkingBoys);
   }
 
   @Override
-  protected Optional<Ticket> tryPark(Car car) {
+  public Optional<Ticket> tryPark(Car car) {
     Optional<Ticket> optionalTicket = super.tryPark(car);
     if (optionalTicket.isPresent()) {
       return optionalTicket;
@@ -23,15 +24,11 @@ public class ParkingManager extends SmartParkingBoy {
   }
 
   private Optional<Ticket> tryParkByParkingBoys(Car car) {
-    return parkingBoys.stream()
-        .map(parkingBoy -> parkingBoy.tryPark(car))
-        .filter(Optional::isPresent)
-        .findFirst()
-        .orElse(Optional.empty());
+    return tryFindAvailableParkingBoy(parkingBoy -> parkingBoy.tryPark(car));
   }
 
   @Override
-  protected Optional<Car> tryPick(Ticket ticket) {
+  public Optional<Car> tryPick(Ticket ticket) {
     Optional<Car> optionalCar = super.tryPick(ticket);
     if (optionalCar.isPresent()) {
       return optionalCar;
@@ -40,8 +37,12 @@ public class ParkingManager extends SmartParkingBoy {
   }
 
   private Optional<Car> tryPickByParkingBoys(Ticket ticket) {
+    return tryFindAvailableParkingBoy(parkingBoy -> parkingBoy.tryPick(ticket));
+  }
+
+  private <T> Optional<T> tryFindAvailableParkingBoy(Function<IParkingBoy, Optional<T>> todo) {
     return parkingBoys.stream()
-        .map(parkingBoy -> parkingBoy.tryPick(ticket))
+        .map(todo)
         .filter(Optional::isPresent)
         .findFirst()
         .orElse(Optional.empty());

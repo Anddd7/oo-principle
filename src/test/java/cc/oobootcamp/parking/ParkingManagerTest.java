@@ -10,8 +10,8 @@ public class ParkingManagerTest {
 
   @Test
   public void should_return_a_valid_ticket_when_park_given_a_parking_manager_with_available_lots_and_graduate_and_smart_parking_boy() {
-    ParkingBoy graduateParkingBoy = new GraduateParkingBoy(Collections.singletonList(new ParkingLot(1)));
-    ParkingBoy smartParkingBoy = new SmartParkingBoy(Collections.singletonList(new ParkingLot(1)));
+    IParkingBoy graduateParkingBoy = new GraduateParkingBoy(Collections.singletonList(new ParkingLot(1)));
+    IParkingBoy smartParkingBoy = new SmartParkingBoy(Collections.singletonList(new ParkingLot(1)));
     ParkingManager parkingManager = new ParkingManager(
         Collections.singletonList(new ParkingLot(1)),
         graduateParkingBoy,
@@ -25,8 +25,8 @@ public class ParkingManagerTest {
 
   @Test
   public void should_return_a_valid_ticket_when_park_given_a_parking_manager_and_graduate_and_smart_parking_boy_but_only_manager_have_available_lots() {
-    ParkingBoy graduateParkingBoy = new GraduateParkingBoy(Collections.singletonList(new ParkingLot(1)));
-    ParkingBoy smartParkingBoy = buildAFullSmartParkingBoy();
+    IParkingBoy graduateParkingBoy = new GraduateParkingBoy(Collections.singletonList(new ParkingLot(1)));
+    IParkingBoy smartParkingBoy = buildAFullSmartParkingBoy();
     ParkingManager parkingManager = new ParkingManager(
         Collections.singletonList(buildAFullParkingLot()),
         graduateParkingBoy,
@@ -40,8 +40,8 @@ public class ParkingManagerTest {
 
   @Test
   public void should_return_a_valid_ticket_when_park_given_a_parking_manager_and_graduate_and_smart_parking_boy_but_only_smart_have_available_lots() {
-    ParkingBoy graduateParkingBoy = buildAFullGraduateParkingBoy();
-    ParkingBoy smartParkingBoy = new SmartParkingBoy(Collections.singletonList(new ParkingLot(1)));
+    IParkingBoy graduateParkingBoy = buildAFullGraduateParkingBoy();
+    IParkingBoy smartParkingBoy = new SmartParkingBoy(Collections.singletonList(new ParkingLot(1)));
     ParkingManager parkingManager = new ParkingManager(
         Collections.singletonList(buildAFullParkingLot()),
         graduateParkingBoy,
@@ -55,8 +55,8 @@ public class ParkingManagerTest {
 
   @Test
   public void should_return_a_valid_ticket_when_park_given_a_parking_manager_and_graduate_and_smart_parking_boy_but_only_graduate_have_available_lots() {
-    ParkingBoy graduateParkingBoy = new GraduateParkingBoy(Collections.singletonList(new ParkingLot(1)));
-    ParkingBoy smartParkingBoy = buildAFullSmartParkingBoy();
+    IParkingBoy graduateParkingBoy = new GraduateParkingBoy(Collections.singletonList(new ParkingLot(1)));
+    IParkingBoy smartParkingBoy = buildAFullSmartParkingBoy();
     ParkingManager parkingManager = new ParkingManager(
         Collections.singletonList(buildAFullParkingLot()),
         graduateParkingBoy,
@@ -70,8 +70,8 @@ public class ParkingManagerTest {
 
   @Test
   public void should_return_a_valid_ticket_when_park_given_a_parking_manager_and_graduate_and_smart_parking_boy_are_all_full() {
-    ParkingBoy graduateParkingBoy = buildAFullGraduateParkingBoy();
-    ParkingBoy smartParkingBoy = buildAFullSmartParkingBoy();
+    IParkingBoy graduateParkingBoy = buildAFullGraduateParkingBoy();
+    IParkingBoy smartParkingBoy = buildAFullSmartParkingBoy();
     ParkingManager parkingManager = new ParkingManager(
         Collections.singletonList(buildAFullParkingLot()),
         graduateParkingBoy,
@@ -85,8 +85,8 @@ public class ParkingManagerTest {
 
   @Test
   public void should_pick_the_car_when_pick_given_a_valid_ticket_with_a_car_parked_in_manager() {
-    ParkingBoy graduateParkingBoy = buildAFullGraduateParkingBoy();
-    ParkingBoy smartParkingBoy = buildAFullSmartParkingBoy();
+    IParkingBoy graduateParkingBoy = buildAFullGraduateParkingBoy();
+    IParkingBoy smartParkingBoy = buildAFullSmartParkingBoy();
     ParkingManager parkingManager = new ParkingManager(
         Collections.singletonList(new ParkingLot(1)),
         graduateParkingBoy,
@@ -102,8 +102,8 @@ public class ParkingManagerTest {
 
   @Test
   public void should_pick_the_car_when_pick_given_a_valid_ticket_with_a_car_parked_in_smart() {
-    ParkingBoy graduateParkingBoy = buildAFullGraduateParkingBoy();
-    ParkingBoy smartParkingBoy = new SmartParkingBoy(Collections.singletonList(new ParkingLot(1)));
+    IParkingBoy graduateParkingBoy = buildAFullGraduateParkingBoy();
+    IParkingBoy smartParkingBoy = new SmartParkingBoy(Collections.singletonList(new ParkingLot(1)));
     ParkingManager parkingManager = new ParkingManager(
         Collections.singletonList(buildAFullParkingLot()),
         graduateParkingBoy,
