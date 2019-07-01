@@ -2,23 +2,42 @@ package cc.oobootcamp.parking;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Stream;
 
-public class GraduateParkingBoy extends ParkingBoy {
+public class GraduateParkingBoy implements IParkingBoy {
+
+  private List<ParkingLot> parkingLots;
 
   public GraduateParkingBoy(List<ParkingLot> parkingLots) {
-    super(parkingLots);
+    this.parkingLots = parkingLots;
   }
 
-  @Override
   public Ticket park(Car car) {
-    return super.park(car);
+    return tryPark(car).orElseThrow(ParkingLotIsFullException::new);
+  }
+
+  public Car pick(Ticket ticket) {
+    return tryPick(ticket).orElseThrow(InvalidTicketException::new);
   }
 
   @Override
-  Optional<ParkingLot> parkingStrategy(Stream<ParkingLot> parkingLots) {
+  public Optional<Ticket> tryPark(Car car) {
     return parkingLots
+        .stream()
         .filter(ParkingLot::hasAvailableLots)
-        .findFirst();
+        .findFirst()
+        .map(parkingLot -> parkingLot.park(car));
+  }
+
+  @Override
+  public Optional<Car> tryPick(Ticket ticket) {
+    return parkingLots
+        .stream()
+        .filter(parkingLot -> parkingLot.isValidTicket(ticket))
+        .findFirst()
+        .map(parkingLot -> parkingLot.pick(ticket));
+  }
+
+  List<ParkingLot> getParkingLots() {
+    return parkingLots;
   }
 }

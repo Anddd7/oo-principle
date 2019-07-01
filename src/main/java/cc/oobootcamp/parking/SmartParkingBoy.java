@@ -4,17 +4,18 @@ import static java.util.Comparator.comparing;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Stream;
 
-public class SmartParkingBoy extends ParkingBoy {
+public class SmartParkingBoy extends GraduateParkingBoy {
 
   public SmartParkingBoy(List<ParkingLot> parkingLots) {
     super(parkingLots);
   }
 
-  @Override
-  Optional<ParkingLot> parkingStrategy(Stream<ParkingLot> parkingLots) {
-    return parkingLots.max(comparing(ParkingLot::getAvailableLots))
-        .filter(ParkingLot::hasAvailableLots);
+  public Optional<Ticket> tryPark(Car car) {
+    return getParkingLots()
+        .stream()
+        .max(comparing(ParkingLot::getAvailableLots))
+        .filter(ParkingLot::hasAvailableLots)
+        .map(parkingLot -> parkingLot.park(car));
   }
 }

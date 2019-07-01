@@ -56,3 +56,42 @@ leaving 取车
 **Given** 有两个停车场和已停好的车
 **When** 使用无效的停车票取一辆车
 **Then** 得到"车票无效, 取车失败"的信息
+
+## ParkingManager
+### park
+**Given** ParkingManager管理Graduate和Smart, 他们管理的停车场都有空位
+**When** 停一辆车
+**Then** 成功停车, 返回停车票
+
+**Given** ParkingManager管理Graduate和Smart, 只有Manager的停车场有空位
+**When** 停一辆车
+**Then** 成功停车, 返回停车票
+
+**Given** ParkingManager管理Graduate和Smart, 只有Graduate的停车场有空位
+**When** 停一辆车
+**Then** 成功停车, 返回停车票
+
+**Given** ParkingManager管理Graduate和Smart, 只有Smart的停车场有空位
+**When** 停一辆车
+**Then** 成功停车, 返回停车票
+
+**Given** ParkingManager管理Graduate和Smart, 他们管理的停车场都没有空位
+**When** 停一辆车
+**Then** 得到"没有空位, 停车失败"的信息
+
+### pick
+**Given** ParkingManager管理Graduate和Smart, 已有一辆车停在ParkingManager中
+**When** 使用有效的停车票取一辆车
+**Then** 成功取到对应的车
+
+**Given** ParkingManager管理Graduate和Smart, 已有一辆车停在Graduate的停车场
+**When** 使用有效的停车票取一辆车
+**Then** 成功取到对应的车
+
+**Given** ParkingManager管理Graduate和Smart, 已有一辆车停在Smart的停车场
+**When** 使用有效的停车票取一辆车
+**Then** 成功取到对应的车
+
+**Given** ParkingManager管理Graduate和Smart, 已有一辆车停在ParkingManager的停车场
+**When** 使用无效的停车票取一辆车
+**Then** 得到"车票无效, 取车失败"的信息
