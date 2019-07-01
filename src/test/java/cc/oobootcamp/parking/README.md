@@ -80,7 +80,7 @@ leaving 取车
 **Then** 得到"没有空位, 停车失败"的信息
 
 ### pick
-**Given** ParkingManager管理Graduate和Smart, 已有一辆车停在ParkingManager的停车场
+**Given** ParkingManager管理Graduate和Smart, 已有一辆车停在ParkingManager中
 **When** 使用有效的停车票取一辆车
 **Then** 成功取到对应的车
 

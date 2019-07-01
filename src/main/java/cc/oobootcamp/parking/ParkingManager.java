@@ -14,7 +14,7 @@ public class ParkingManager extends SmartParkingBoy {
   }
 
   @Override
-  Optional<Ticket> tryPark(Car car) {
+  protected Optional<Ticket> tryPark(Car car) {
     Optional<Ticket> optionalTicket = super.tryPark(car);
     if (optionalTicket.isPresent()) {
       return optionalTicket;

@@ -10,7 +10,7 @@ public class GraduateParkingBoy extends ParkingBoy {
   }
 
   @Override
-  Optional<Ticket> tryPark(Car car) {
+  protected Optional<Ticket> tryPark(Car car) {
     return getParkingLots()
         .stream()
         .filter(ParkingLot::hasAvailableLots)
